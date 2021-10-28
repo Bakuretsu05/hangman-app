@@ -1,13 +1,13 @@
 # hangman-app
 A Hangman game.
 
-NOTE before playing:
-Create a "words.txt" file to store all the words.
-Each words are separated with new line.
+NOTE before playing:<br />
+Create a "words.txt" file to store all the words.<br />
+Each words are separated with new line.<br />
 
-Ex.
-Elephant
-Mouse
-Ant
-Kangaroo
+Ex.<br />
+Elephant<br />
+Mouse<br />
+Ant<br />
+Kangaroo<br />
 ...
