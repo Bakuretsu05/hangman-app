@@ -4,6 +4,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <time.h>
+#include <algorithm>
 using namespace std;
 
 enum gameState{WIN, LOSE, PLAYING};
@@ -91,7 +92,8 @@ void logic(){
     }
     else {
         wrong++;
-        triedChar.push_back(guess);
+        if(find(triedChar.begin(), triedChar.end(), guess) != triedChar.end()) 
+            triedChar.push_back(guess);
     }
 
     if(wrong >= (sizeof(hangmanPics)/sizeof(hangmanPics[0]))) status == LOSE;
