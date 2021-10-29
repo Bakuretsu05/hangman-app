@@ -9,17 +9,109 @@ using namespace std;
 
 enum gameState{WIN, LOSE, PLAYING};
 gameState status;
-string hangmanPics[7] = {" ", 
-                         " O", 
-                         " O\n |", 
-                         " O\n/|", 
-                         " O\n/|\\", 
-                         " O\n/|\\\n/", 
-                         " O\n/|\\\n/ \\"};
 int wrong;
 string word, guess;
 vector<string> displayedWord, triedChar;
 vector<int> occurence;
+
+void drawHangman(int state){
+    if (state == 0){
+        cout << " +--------+      " << endl;
+        cout << " |        |      " << endl;
+        cout << " |        |      " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " #==============#" << endl;
+    }
+    else if (state == 1){
+        cout << " +--------+      " << endl;
+        cout << " |        |      " << endl;
+        cout << " |        |      " << endl;
+        cout << " |        0      " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " #==============#" << endl;
+    }
+    else if (state == 2){
+        cout << " +--------+      " << endl;
+        cout << " |        |      " << endl;
+        cout << " |        |      " << endl;
+        cout << " |        0      " << endl;
+        cout << " |        |      " << endl;
+        cout << " |        |      " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " #==============#" << endl;
+    }
+
+    else if (state == 3){
+        cout << " +--------+      " << endl;
+        cout << " |        |      " << endl;
+        cout << " |        |      " << endl;
+        cout << " |        0      " << endl;
+        cout << " |       /|      " << endl;
+        cout << " |        |      " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " #==============#" << endl;
+    }
+
+    else if (state == 4){
+        cout << " +--------+      " << endl;
+        cout << " |        |      " << endl;
+        cout << " |        |      " << endl;
+        cout << " |        0      " << endl;
+        cout << " |       /|\\    " << endl;
+        cout << " |        |      " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " #==============#" << endl;
+    }
+
+    else if (state == 5){
+        cout << " +--------+      " << endl;
+        cout << " |        |      " << endl;
+        cout << " |        |      " << endl;
+        cout << " |        0      " << endl;
+        cout << " |       /|\\    " << endl;
+        cout << " |        |      " << endl;
+        cout << " |       /       " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " #==============#" << endl;
+    }
+
+    else if (state == 6){
+        cout << " +--------+      " << endl;
+        cout << " |        |      " << endl;
+        cout << " |        |      " << endl;
+        cout << " |        0      " << endl;
+        cout << " |       /|\\    " << endl;
+        cout << " |        |      " << endl;
+        cout << " |       / \\    " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " |               " << endl;
+        cout << " #==============#" << endl;
+    }
+}
+
 
 int countWords(){
     string temp;
@@ -59,21 +151,25 @@ void setup(){
     myFile.close();
 }
 
-void drawAndInput(){
+void drawGUI(){
     system("cls");
     cout << "____________Hangman Game____________" << endl;
     cout << "-> Tried Character: ";
     for(auto i = triedChar.begin(); i != triedChar.end(); i++){
         cout << *i << ", ";
     }
-
-    cout << endl << hangmanPics[wrong] << endl << endl;
+    cout << endl << endl;
+    drawHangman(wrong);
+    cout << endl;
     
     for(auto i = displayedWord.begin(); i != displayedWord.end(); i++){
         cout << *i << " ";
     }
 
-    cout << endl << "Please guess a letter: "; cin >> guess;
+    if(status == PLAYING){
+        cout << endl << "Guess a letter: "; 
+        cin >> guess;
+    }
 }
 
 void logic(){
@@ -101,24 +197,30 @@ void logic(){
             triedChar.push_back(guess);
     }
 
-    if(wrong >= (sizeof(hangmanPics)/sizeof(hangmanPics[0]))) status == LOSE;
-    if(isWin()) status = WIN;
+    if(wrong == 6){
+        status = LOSE;
+        drawGUI();
+    }
+    if(isWin()){
+        status = WIN;
+        drawGUI();
+    }
 }
 
 int main(){
     setup();
     while(status == PLAYING){
-        drawAndInput();
+        drawGUI();
         logic();
     }
 
     if(status == WIN){
-        cout << "grats, flite could do it faster tho" << endl;
-        cout << "the word was \"" << word << "\"" << endl;
+        cout << endl << "You WON!!!" << endl;
         system("pause");
     }
     else {
-        cout << "The man is dead, flite couldve solved that" << endl;
+        cout << endl << "The man is dead, You Lost..." << endl;
+        cout << "The word was \"" << word << "\"." << endl;
         system("pause");
     }
 
