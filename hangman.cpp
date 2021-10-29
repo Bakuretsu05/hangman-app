@@ -92,7 +92,9 @@ void logic(){
     }
     else {
         wrong++;
-        if(find(triedChar.begin(), triedChar.end(), guess) != triedChar.end()) 
+
+        // confirm if char has not existed yet before pushing
+        if(find(triedChar.begin(), triedChar.end(), guess) == triedChar.end()) 
             triedChar.push_back(guess);
     }
 
