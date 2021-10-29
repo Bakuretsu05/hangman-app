@@ -81,11 +81,14 @@ void logic(){
         occurence.clear();
         int found;
         int startPos = 0;
-        do{
+        while(true){
             found = word.find(guess, startPos);
-            occurence.push_back(found);
-            startPos = found + 1;
-        } while(found >= 0);
+            if(found >= 0){
+                occurence.push_back(found);
+                startPos = found + 1;
+            }
+            else break;
+        }
         for (auto i = occurence.begin(); i != occurence.end(); ++i){
             displayedWord[*i] = word[*i];
         }
