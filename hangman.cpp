@@ -164,7 +164,7 @@ void drawGUI(){
     cout << endl;
     
     for(auto i = displayedWord.begin(); i != displayedWord.end(); i++){
-        cout << *i << " ";
+        cout << *i;
     }
 
     if(status == PLAYING){
