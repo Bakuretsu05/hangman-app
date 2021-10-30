@@ -145,7 +145,8 @@ void setup(){
 
     // setup the underline
     for(int i = 0; i < word.size(); i++){
-        displayedWord.push_back("_");
+        if(word[i] == ' ') displayedWord.push_back(" ");
+        else displayedWord.push_back("_");
     }
 
     myFile.close();
