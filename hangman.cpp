@@ -174,6 +174,8 @@ void drawGUI(){
 }
 
 void logic(){
+    if(guess.length() > 1) return; // if player entered more than one letter, return
+
     if(word.find(guess) != string::npos){
         occurence.clear();
         int found;
